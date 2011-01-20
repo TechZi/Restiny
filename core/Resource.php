@@ -16,7 +16,12 @@ class Resource {
 	private $_response = null;	
 	
 	public function __construct(Request $request, Response $response) {
-		$resourcesConfig = Config::loadConfig('resources');
+//		$resourcesConfig = Config::loadConfig('resources');
+
+		$this->_request = $request;		
 		
+		$this->_response = $response;
 	}
+	
+	
 }
