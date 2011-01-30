@@ -4,8 +4,9 @@ class CycleManager {
 	public static function run() {
 		try {
 			$request = new Request();
-	
-			$resource = ResourceRouter::loadResource($request, $resource);
+			$response = new Response();
+			
+			$resource = ResourceRouter::loadResource($request, $response);
 	
 			$requestMethod = strtolower($request->getRequestMethod());
 					

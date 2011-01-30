@@ -6,21 +6,21 @@ class Resource {
 	 * 
 	 * @var Request
 	 */
-	private $_request = null;
+	protected $request = null;
 	
 	/**
 	 * Response对象引用
 	 * 
 	 * @var Response
 	 */
-	private $_response = null;	
+	protected $response = null;	
 	
 	public function __construct(Request $request, Response $response) {
 //		$resourcesConfig = Config::loadConfig('resources');
 
-		$this->_request = $request;		
+		$this->request = $request;		
 		
-		$this->_response = $response;
+		$this->response = $response;
 	}
 	
 	

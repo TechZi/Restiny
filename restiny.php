@@ -1,7 +1,7 @@
 <?php
 
-define('APP_PATH', dirname(__FILE__));
-define('CORE_PATH', dirname(__FILE__));
+define('APP_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR.'app');
+define('CORE_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR.'core');
 
 class Restiny {
 	private static $_instance;
@@ -35,7 +35,7 @@ class Restiny {
 	private function _findFile($className) {
 		$appFilePath = APP_PATH.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.$className.'.php';			
 		
-		$coreFilePath = CORE_PATH.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.$className.'.php';	
+		$coreFilePath = CORE_PATH.DIRECTORY_SEPARATOR.$className.'.php';	
 		
 		return file_exists($appFilePath) ? 
 					$appFilePath :
