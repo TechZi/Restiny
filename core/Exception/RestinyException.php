@@ -1,12 +1,13 @@
 <?php
 
 /**
- * Description of RestinyException
+ * 所有Restiny异常类的父类
  *
  * @author zhangyuyi
+ * @version $Id$
  */
 class RestinyException extends Exception {
-	//put your code here
+	
 }
 
 ?>

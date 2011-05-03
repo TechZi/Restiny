@@ -1,5 +1,8 @@
 <?php
 /**
+ * Restiny资源未找到异常类
+ *
+ * @author zhangyuyi
  * @version $Id$
  */
 
