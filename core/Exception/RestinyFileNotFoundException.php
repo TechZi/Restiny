@@ -1,6 +1,6 @@
 <?php
 
-class RestinyFileNotFoundException extends Exception {
+class RestinyFileNotFoundException extends RestinyException {
 
 	public function __construct($message, $code) {
 		echo $message;

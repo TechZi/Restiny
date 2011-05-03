@@ -1,6 +1,6 @@
 <?php
 
-class RestinyHttpException extends Exception {
+class RestinyHttpException extends RestinyException {
 	public function __construct($message, $code) {
 		$response = new Response();
 
