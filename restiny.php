@@ -1,4 +1,10 @@
 <?php
+/**
+ * Restiny框架引导类
+ *
+ * @author zhangyuyi
+ * @version $Id$
+ */
 
 define('APP_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR.'app');
 define('CORE_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR.'core');
@@ -33,6 +39,7 @@ class Restiny {
 	}
 
 	private function _findFile($className) {
+		//TODO 需要改进查找文件的方法
 		$appFilePath = APP_PATH.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.$className.'.php';
 
 		$coreFilePath = CORE_PATH.DIRECTORY_SEPARATOR.$className.'.php';
