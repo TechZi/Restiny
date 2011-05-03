@@ -41,8 +41,14 @@ class Restiny {
 	private function _findFile($className) {
 		//TODO 需要改进查找文件的方法
 		$appFilePath = APP_PATH.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.$className.'.php';
-
-		$coreFilePath = CORE_PATH.DIRECTORY_SEPARATOR.$className.'.php';
+		
+//		$coreFilePath = CORE_PATH.DIRECTORY_SEPARATOR.$className.'.php';
+			
+		$iterator = new RecursiveDirectoryIterator(CORE_PATH);
+		
+		$coreFilePath = $this->_recursiveFindFile($iterator, $className);
+		
+//		var_dump($coreFilePath);
 
 		return file_exists($appFilePath) ?
 					$appFilePath :
@@ -50,7 +56,26 @@ class Restiny {
 						$coreFilePath :
 						false;
 	}
+
+	private function _recursiveFindFile(RecursiveDirectoryIterator $iterator, $className) {
+		for ( ; $iterator->valid(); $iterator->next()) {
+			if ($iterator->isDot()) {
+				continue;
+			}
+			var_dump(strval($iterator->getFilename()));
+			if ($iterator->isFile() && $className == strstr($iterator->getFilename(), '.', true)) {
+				return strval($iterator->current());
+			}
+
+			if ($iterator->isDir() && $iterator->hasChildren()) {
+				$this->_recursiveFindFile($iterator->getChildren(), $className);
+			}
+
+		}
+	}
 }
+$r =new Restiny();
+$r->init();
 
 function d() {
 	$args = func_get_args();
