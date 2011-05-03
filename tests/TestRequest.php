@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Request测试类
+ *
+ * @version $Id$
+ */
+
 require_once 'PHPUnit\Framework\TestCase.php';
 require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'testIndex.php';
 /**
@@ -33,7 +39,6 @@ class TestRequest extends PHPUnit_Framework_TestCase {
 	public function testRequestConstructException() {
 		$_SERVER['REQUEST_METHOD'] = 'getc';
 		$_SERVER['REQUEST_URI'] = '/feed/';
-//		$this->setExpectedException('RestinyHttpException', 'Request method is not allowed');
 
 		$request = new Request();
 		d($request);
