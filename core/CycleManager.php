@@ -11,13 +11,21 @@ class CycleManager {
 			$request = new Request();
 			$response = new Response();
 
+			if (!Representor::isVaildHttpAccept($request->getRequesetAccept())) {
+				throw new RestinyRepresentorException('HTTP Accept is not support', Response::METHOD_NOT_ALLOWED);
+			}
+
 			$resource = ResourceRouter::loadResource($request, $response);
 
 			$requestMethod = strtolower($request->getRequestMethod());
 
-			if (method_exists($resource, $requestMethod)) {
-				$resource->$method();
+			if (!method_exists($resource, $requestMethod)) {
+				throw new RestinyResourceException('Resource is not support [' . $requestMethod . '] method', Response::METHOD_NOT_ALLOWED);
 			}
+
+			$resource->$method();
+
+
 		} catch (RestinyHttpException $e) {
 			$response = new Response();
 
@@ -26,7 +34,7 @@ class CycleManager {
 
 			$response->respond();
 
-			exit();
+//			exit();
 		}
 	}
 

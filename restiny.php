@@ -23,7 +23,7 @@ class Restiny {
 	public function init() {
 		spl_autoload_register(array($this, '_autoload'));
 
-		CycleManager::run();
+//		CycleManager::run();
 	}
 
 	private function _autoload($className) {
@@ -39,16 +39,13 @@ class Restiny {
 	}
 
 	private function _findFile($className) {
-		//TODO 需要改进查找文件的方法
+		$appFilePath = '';
+		$coreFilePath = '';
+
 		$appFilePath = APP_PATH.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.$className.'.php';
-		
-//		$coreFilePath = CORE_PATH.DIRECTORY_SEPARATOR.$className.'.php';
-			
+
 		$iterator = new RecursiveDirectoryIterator(CORE_PATH);
-		
-		$coreFilePath = $this->_recursiveFindFile($iterator, $className);
-		
-//		var_dump($coreFilePath);
+		$this->_recursiveFindFile($iterator, $className, $coreFilePath);
 
 		return file_exists($appFilePath) ?
 					$appFilePath :
@@ -57,25 +54,26 @@ class Restiny {
 						false;
 	}
 
-	private function _recursiveFindFile(RecursiveDirectoryIterator $iterator, $className) {
+	private function _recursiveFindFile(RecursiveDirectoryIterator $iterator, $className, &$filePath) {
 		for ( ; $iterator->valid(); $iterator->next()) {
 			if ($iterator->isDot()) {
 				continue;
 			}
-			var_dump(strval($iterator->getFilename()));
-			if ($iterator->isFile() && $className == strstr($iterator->getFilename(), '.', true)) {
-				return strval($iterator->current());
-			}
 
 			if ($iterator->isDir() && $iterator->hasChildren()) {
-				$this->_recursiveFindFile($iterator->getChildren(), $className);
+				$this->_recursiveFindFile($iterator->getChildren(), $className, $filePath);
+			}
+
+			if ($iterator->isFile() && $className == strstr($iterator->getFilename(), '.', true) && substr($iterator->getFilename(), -3) == 'php') {
+				$filePath = strval($iterator->current());
+
+				return ;
 			}
 
 		}
 	}
 }
-$r =new Restiny();
-$r->init();
+
 
 function d() {
 	$args = func_get_args();
