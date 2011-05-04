@@ -14,7 +14,11 @@ class CycleManager {
 			if (!Representor::isVaildHttpAccept($request->getRequesetAccept())) {
 				throw new RestinyRepresentorException('HTTP Accept is not support', Response::METHOD_NOT_ALLOWED);
 			}
+			
+			$representorName = ucfirst($request->getRequesetAccept()) . 'Representor';
 
+			$representor = new $representorName;
+			
 			$resource = ResourceRouter::loadResource($request, $response);
 
 			$requestMethod = strtolower($request->getRequestMethod());
@@ -24,8 +28,12 @@ class CycleManager {
 			}
 
 			$resource->$method();
+			
+			$response->setCode(Response::OK);
+			$response->setHeader('Content-type', $represenor->getContentType());
+			$response->setBody($representor->generateRepresentor($resource->getOutputData()));
 
-
+			$response->respond();
 		} catch (RestinyHttpException $e) {
 			$response = new Response();
 

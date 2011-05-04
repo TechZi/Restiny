@@ -3,6 +3,7 @@
 class Response {
 	const METHOD_NOT_ALLOWED = 405;
 	const NOT_FOUND = 404;
+	const OK = 200;
 
 	private $_code = 0;
 	private $_headers = array();
