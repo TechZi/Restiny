@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Resource 导航器
+ *
+ * @author zhangyuyi
+ * @version $Id$
+ */
+
 class ResourceRouter {
 	/**
 	 * 载入Resource

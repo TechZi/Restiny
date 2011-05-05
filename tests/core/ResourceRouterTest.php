@@ -33,10 +33,12 @@ class ResourceRouterTest extends PHPUnit_Framework_TestCase {
 	 * @todo Implement testLoadResource().
 	 */
 	public function testLoadResource() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
+		$resquest = new Request();
+		$resquest = new Response();
+
+		$resource = ResourceRouter::loadResource($request, $response);
+//		$exceptedResource =
+//		$this->assertEquals($expected, $actual)
 	}
 
 }
