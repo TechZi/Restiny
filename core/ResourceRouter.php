@@ -14,7 +14,8 @@ class ResourceRouter {
 	 * @param Request $request
 	 */
 	public static function loadResource(Request $request, Response $response) {
-		$resourcesConfig = Config::loadConfig('resources');
+		$configLoader = new ConfigLoader();
+		$resourcesConfig = $configLoader->loadConfig('resources');
 
 		$requestUri = $request->getRequestUri();
 
@@ -50,7 +51,7 @@ class ResourceRouter {
 			throw new RestinyResourceException('Resource not found', Response::NOT_FOUND);
 		}
 
-		$resource = new $resourceName();
+		$resource = new $resourceName($requestParams);
 
 		return $resource;
 	}

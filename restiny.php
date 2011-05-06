@@ -20,10 +20,12 @@ class Restiny {
 		return self::$_instance;
 	}
 
-	public function init() {
+	public function init($isWantToRun = true) {
 		spl_autoload_register(array($this, '_autoload'));
 
-//		CycleManager::run();
+		if ($isWantToRun) {
+			CycleManager::run();
+		}
 	}
 
 	private function _autoload($className) {

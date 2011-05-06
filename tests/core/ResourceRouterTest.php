@@ -36,9 +36,18 @@ class ResourceRouterTest extends PHPUnit_Framework_TestCase {
 		$resquest = new Request();
 		$resquest = new Response();
 
+		$mockClassConstructArgs = array(
+			'feedId' => '10000'
+		);
+		$feedResource = $this->getMock('Resouce', array('get'), $mockClassConstructArgs);
+		$feedResource->expects($this->once())
+					 ->method('get')
+					 ->will($this->returnValue('This is a free feed'));
+
+		//TODO 怎么mock一个内部new的对象
 		$resource = ResourceRouter::loadResource($request, $response);
-//		$exceptedResource =
-//		$this->assertEquals($expected, $actual)
+
+		$this->assertEquals($expectedResource, $resource);
 	}
 
 }
