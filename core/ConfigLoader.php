@@ -14,13 +14,15 @@ class ConfigLoader {
 	}
 
 	public function loadConfig($configFileName) {
-		$configFilePath = $this->_configDirectoryPath . $configFileName.'.php';
-d($configFilePath);
+		$configFilePath = $this->_configDirectoryPath . DIRECTORY_SEPARATOR . $configFileName.'.php';
+
 		if (!file_exists($configFilePath)) {
 			throw new RestinyFileNotFoundException($configFileName.' file not found', 0);
 		}
+		
+		$fileContent = require_once $configFilePath;
 
-		return require $configFilePath;
+		return require_once $configFilePath;
 	}
 
 	public function setConfigDirectoryPath($path) {
