@@ -38,7 +38,13 @@ class ConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	protected function tearDown() {
 
 	}
-
+	
+	public function testFailedLoadConfig() {
+		$this->setExpectedException('RestinyFileNotFoundException', 'resources1 config file not found');
+		
+		ConfigLoader::loadConfig('resources1');		
+	}
+	
 	/**
 	 *
 	 */
@@ -59,8 +65,7 @@ class ConfigLoaderTest extends PHPUnit_Framework_TestCase {
 
 		$file->setContent($fileContent);
 
-		$configLoader = new ConfigLoader(vfsStream::url($this->_configDir));
-		$config = $configLoader->loadConfig($this->_configFileName);
+		$config = ConfigLoader::loadConfig($this->_configFileName, vfsStream::url($this->_configDir));
 
 		$this->assertEquals($data, $config);
 		$this->assertEquals('2', $config['a']);
