@@ -2,7 +2,7 @@
 /**
  * Request Class
  *
- * @author zhangyuyi
+ * @author Zhangyuyi
  * @version $Id$
  */
 

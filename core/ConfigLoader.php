@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * 配置载入器 
+ * 
+ * @author Zhangyuyi
+ * @version $Id$
+ *
+ */
+
 class ConfigLoader {
 	private $_configDirectoryPath = '';
 
@@ -14,13 +22,12 @@ class ConfigLoader {
 	}
 
 	public function loadConfig($configFileName) {
+		//TODO 进程级的缓存
 		$configFilePath = $this->_configDirectoryPath . DIRECTORY_SEPARATOR . $configFileName.'.php';
 
 		if (!file_exists($configFilePath)) {
 			throw new RestinyFileNotFoundException($configFileName.' file not found', 0);
 		}
-		
-		$fileContent = require_once $configFilePath;
 
 		return require_once $configFilePath;
 	}

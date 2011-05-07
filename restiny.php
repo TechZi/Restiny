@@ -2,7 +2,7 @@
 /**
  * Restiny框架引导类
  *
- * @author zhangyuyi
+ * @author Zhangyuyi
  * @version $Id$
  */
 

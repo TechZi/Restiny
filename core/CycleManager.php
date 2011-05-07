@@ -2,7 +2,7 @@
 /**
  * 请求管理类。将一次请求-响应做为一个cycle
  *
- * @author zhangyuyi
+ * @author Zhangyuyi
  * @version $Id$
  */
 class CycleManager {

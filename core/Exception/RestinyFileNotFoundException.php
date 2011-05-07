@@ -3,7 +3,7 @@
 /**
  * Restiny文件未找到异常
  *
- * @author zhangyuyi
+ * @author Zhangyuyi
  * @version $Id$
  */
 

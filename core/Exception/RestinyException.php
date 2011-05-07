@@ -3,7 +3,7 @@
 /**
  * 所有Restiny异常类的父类
  *
- * @author zhangyuyi
+ * @author Zhangyuyi
  * @version $Id$
  */
 class RestinyException extends Exception {

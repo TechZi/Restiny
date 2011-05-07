@@ -3,7 +3,7 @@
 /**
  * Resource 导航器
  *
- * @author zhangyuyi
+ * @author Zhangyuyi
  * @version $Id$
  */
 

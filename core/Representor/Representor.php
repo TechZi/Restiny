@@ -1,7 +1,9 @@
 <?php
 
 /**
- * @author zhangyuyi
+ * 表示类
+ *
+ * @author Zhangyuyi
  * @version $Id$
  */
 class Representor {
@@ -15,7 +17,7 @@ class Representor {
 	public function setData(array $data) {
 		$this->_data = $data;
 	}
-	
+
 	protected function getData() {
 		return $this->_data;
 	}

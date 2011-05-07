@@ -3,7 +3,7 @@
 /**
  * Restiny Http异常处理类
  *
- * @author zhangyuyi
+ * @author Zhangyuyi
  * @version $Id$
  */
 
