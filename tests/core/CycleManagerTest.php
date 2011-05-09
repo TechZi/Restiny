@@ -29,15 +29,6 @@ class CycleManagerTest extends PHPUnit_Framework_TestCase {
 
 	}
 
-	/**
-	 * @todo Implement testRun().
-	 */
-	public function testRun() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
 
 }
 

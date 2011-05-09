@@ -13,103 +13,12 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $object;
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
 	protected function setUp() {
 		$this->object = new Response;
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
 	protected function tearDown() {
 
-	}
-
-	/**
-	 * @todo Implement testGetCode().
-	 */
-	public function testGetCode() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testSetCode().
-	 */
-	public function testSetCode() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testSetHeader().
-	 */
-	public function testSetHeader() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testGetHeader().
-	 */
-	public function testGetHeader() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testSetHeaders().
-	 */
-	public function testSetHeaders() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testGetBody().
-	 */
-	public function testGetBody() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testSetBody().
-	 */
-	public function testSetBody() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testRespond().
-	 */
-	public function testRespond() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	public function testSetResponseCode() {
 	}
 }
 

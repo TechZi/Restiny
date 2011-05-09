@@ -14,54 +14,11 @@ class RequestTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $object;
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
 	protected function setUp() {
 
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
 	protected function tearDown() {
-
-	}
-
-	/**
-	 * @todo Implement testSetRequestParams().
-	 */
-	public function testSetRequestParams() {
-
-	}
-
-	/**
-	 * @todo Implement testGetRequestParams().
-	 */
-	public function testGetRequestParams() {
-
-	}
-
-	/**
-	 * @todo Implement testGetRequestMethod().
-	 */
-	public function testGetRequestMethod() {
-
-	}
-
-	/**
-	 * @todo Implement testGetRequestUri().
-	 */
-	public function testGetRequestUri() {
-
-	}
-
-	/**
-	 * @todo Implement testIsVaildRequestMethod().
-	 */
-	public function testIsVaildRequestMethod() {
 
 	}
 

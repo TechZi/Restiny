@@ -44,7 +44,7 @@ class ConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	public function testLoadConfig() {
 		$dir = vfsStream::newDirectory($this->_configDir)->at(vfsStreamWrapper::getRoot());
 		$file = vfsStream::newFile($this->_configFile)->at($dir);
-
+d(vfsStream::url($this->_configDir));
 		$data= array(
 			'/feed/(?<name>[a-zA-Z_0-9]+)' => '/feed',
 			'a' => '2',
