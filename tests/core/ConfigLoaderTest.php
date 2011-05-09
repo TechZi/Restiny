@@ -23,28 +23,21 @@ class ConfigLoaderTest extends PHPUnit_Framework_TestCase {
 	private $_configDir = 'resources';
 	private $_configFileName = 'resources';
 	private	$_configFile = 'resources.php';
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
+
 	protected function setUp() {
 		vfsStream::setup($this->_rootConfigDir);
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
 	protected function tearDown() {
 
 	}
-	
+
 	public function testFailedLoadConfig() {
 		$this->setExpectedException('RestinyFileNotFoundException', 'resources1 config file not found');
-		
-		ConfigLoader::loadConfig('resources1');		
+
+		ConfigLoader::loadConfig('resources1');
 	}
-	
+
 	/**
 	 *
 	 */

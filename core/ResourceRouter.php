@@ -13,12 +13,15 @@ class ResourceRouter {
 	 *
 	 * @param Request $request
 	 */
-	public static function loadResource(Request $request, Response $response) {
-		$configLoader = new ConfigLoader();
-		$resourcesConfig = $configLoader->loadConfig('resources');
+	public static function loadResource($requestUri, array $resourcesConfig = array(), $resourceFilePath = '') {
+		if (empty($resourcesConfig)) {
+			$resourcesConfig = ConfigLoader::loadConfig('resources');	
+		}	
 
-		$requestUri = $request->getRequestUri();
-
+		if (empty($resourceFilePath)) {
+			$resourceFilePath = APP_PATH.DIRECTORY_SEPARATOR.'resources';
+		}	
+		
 		foreach ($resourcesConfig as $uri => $resourceName) {
 			preg_match('#'.$uri.'#', $requestUri, $matches);
 
@@ -26,7 +29,6 @@ class ResourceRouter {
 				continue ;
 			}
 
-			$requestParams = $request->getRequestParams();
 			foreach ($matches as $key => $match) {
 				if (is_int($key)) {
 					continue ;
@@ -36,16 +38,15 @@ class ResourceRouter {
 			}
 
 		}
+	
+		$resourceName = $resourceName . 'Resource';
+		$resourceFile = $resourceFilePath . DIRECTORY_SEPARATOR . $resourceName . '.php';	
 
-		$request->setRequestParams($requestParams);
-
-		$resourceFilePath = APP_PATH.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.$resourceName.'.php';
-
-		if (!file_exists($resourceFilePath)) {
+		if (!file_exists($resourceFile)) {
 			throw new RestinyResourceException('Resource not found', Response::NOT_FOUND);
 		}
 
-		require_once($resourceFilePath);
+		require_once($resourceFile);
 
 		if (!class_exists($resourceName, false)) {
 			throw new RestinyResourceException('Resource not found', Response::NOT_FOUND);

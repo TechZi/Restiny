@@ -1,6 +1,17 @@
 <?php
 
+/**
+ * 资源载入器 - 测试用例
+ *
+ * @author Zhangyuyi
+ * @version $Id$
+ */
+
+require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'testBootstrap.php';
 require_once dirname(__FILE__) . '/../../core/ResourceRouter.php';
+require_once 'vfsStream/vfsStreamDirectory.php';
+require_once 'vfsStream/vfsStreamWrapper.php';
+require_once 'vfsStream/vfsStream.php';
 
 /**
  * Test class for ResourceRouter.
@@ -8,46 +19,72 @@ require_once dirname(__FILE__) . '/../../core/ResourceRouter.php';
  */
 class ResourceRouterTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * @var ResourceRouter
-	 */
-	protected $object;
+	private $_resourceRootDirectoryPath = 'root';
+	private $_reouceceDirectoryPath = 'resources';
+	private $_resourceFile = 'FeedResource.php';
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
 	protected function setUp() {
-		$this->object = new ResourceRouter;
+		vfsStream::setup($this->_resourceRootDirectoryPath);
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
 	protected function tearDown() {
 
 	}
 
-	/**
-	 * @todo Implement testLoadResource().
-	 */
+	private function _getResourceFileContent() {
+		$content = '
+		<?php
+
+			class FeedResource extends Resource {
+				public function get() {
+					$feedId = $this->getParam("feedId");
+
+					$outputData = array(
+						"feedId" => $feedId,
+						"text" => "this is a free feed"
+					);
+
+					$this->setOutputData($outputData);
+				}
+			}
+
+		?>
+		';
+
+		return $content;
+	}
+
 	public function testLoadResource() {
-		$resquest = new Request();
-		$resquest = new Response();
+		$this->_mockResourceFile();
 
-		$mockClassConstructArgs = array(
-			'feedId' => '10000'
+		$requestUri = '/feed/100';
+
+		$resource = ResourceRouter::loadResource($requestUri, $this->_getResourceConfig(), $this->_getMockedResourceFilePath());
+		$resource->get();
+		$outputData = $resource->getOutputData();
+
+		$this->assertEquals('100', $resource->getParam('feedId'));
+
+		$this->assertEquals('100', $outputData['feedId']);
+		$this->assertEquals('this is a free feed', $outputData['text']);
+	}
+
+	private function _mockResourceFile() {
+		$dir = vfsStream::newDirectory($this->_reouceceDirectoryPath)->at(vfsStreamWrapper::getRoot());
+		$file = vfsStream::newFile($this->_resourceFile)->at($dir);
+
+		$fileContent = $this->_getResourceFileContent();
+		$file->setContent($fileContent);
+	}
+
+	private function _getMockedResourceFilePath() {
+		return vfsStream::url($this->_reouceceDirectoryPath);
+	}
+
+	private function _getResourceConfig() {
+		return array(
+			'/feed/(?<feedId>[a-zA-Z_0-9]+)' => 'Feed',
 		);
-		$feedResource = $this->getMock('Resouce', array('get'), $mockClassConstructArgs);
-		$feedResource->expects($this->once())
-					 ->method('get')
-					 ->will($this->returnValue('This is a free feed'));
-
-		//TODO 怎么mock一个内部new的对象
-		$resource = ResourceRouter::loadResource($request, $response);
-
-		$this->assertEquals($expectedResource, $resource);
 	}
 
 }
