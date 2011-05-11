@@ -23,7 +23,7 @@ class CycleManager {
 			if (!method_exists($resource, $requestMethod)) {
 				throw new RestinyResourceException('Resource is not support [' . $requestMethod . '] method', Response::METHOD_NOT_ALLOWED);
 			}
-			$resource->$method();
+			$resource->$requestMethod();
 
 			$response->setCode(Response::OK);
 			$response->setHeader('Content-type', $representor->getContentType());
@@ -31,7 +31,7 @@ class CycleManager {
 
 			$response->respond();
 			
-		} catch (RestinyHttpException $e) {
+		} catch (RestinyException $e) {
 			$response = new Response();
 
 			$response->setCode($e->getCode());

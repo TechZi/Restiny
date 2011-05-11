@@ -36,9 +36,12 @@ class ResourceRouter {
 
 				$requestParams[$key] = $match;
 			}
-
+			
+			if (!empty($matches) && !empty($requestParams)) {
+				break ;
+			}
 		}
-	
+
 		$resourceName = $resourceName . 'Resource';
 		$resourceFile = $resourceFilePath . DIRECTORY_SEPARATOR . $resourceName . '.php';	
 

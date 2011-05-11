@@ -7,7 +7,6 @@
  * @version $Id$
  */
 class Representor {
-
 	private $_data;
 
 	public static function isVaildHttpAccept($httpAccept) {
