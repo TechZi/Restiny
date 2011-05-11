@@ -18,7 +18,7 @@ class CycleManager {
 			$representorName = ucfirst($request->getRequesetAccept()) . 'Representor';
 			$representor = new $representorName;
 
-			$resource = ResourceRouter::loadResource($request, $response);
+			$resource = ResourceRouter::loadResource($request->getRequestUri());
 			$requestMethod = strtolower($request->getRequestMethod());
 			if (!method_exists($resource, $requestMethod)) {
 				throw new RestinyResourceException('Resource is not support [' . $requestMethod . '] method', Response::METHOD_NOT_ALLOWED);
@@ -30,6 +30,7 @@ class CycleManager {
 			$response->setBody($representor->generateRepresentor($resource->getOutputData()));
 
 			$response->respond();
+			
 		} catch (RestinyHttpException $e) {
 			$response = new Response();
 

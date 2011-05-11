@@ -44,16 +44,19 @@ class Restiny {
 		$appFilePath = '';
 		$coreFilePath = '';
 
-		$appFilePath = APP_PATH.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.$className.'.php';
+		$appIterator = new RecursiveDirectoryIterator(APP_PATH);
+		$this->_recursiveFindFile($appIterator, $className, $appFilePath);
+		if (file_exists($appFilePath)) {
+			return $appFilePath;
+		}
 
-		$iterator = new RecursiveDirectoryIterator(CORE_PATH);
-		$this->_recursiveFindFile($iterator, $className, $coreFilePath);
+		$coreIterator = new RecursiveDirectoryIterator(CORE_PATH);
+		$this->_recursiveFindFile($coreIterator, $className, $coreFilePath);
+		if (file_exists($coreFilePath)) {
+			return $coreFilePath;
+		}
 
-		return file_exists($appFilePath) ?
-					$appFilePath :
-					file_exists($coreFilePath) ?
-						$coreFilePath :
-						false;
+		return false;
 	}
 
 	private function _recursiveFindFile(RecursiveDirectoryIterator $iterator, $className, &$filePath) {
