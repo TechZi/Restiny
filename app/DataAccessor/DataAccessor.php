@@ -11,7 +11,7 @@ class DataAccessor {
 
 	public function __construct($dbName) {
 		//TODO  实例化一个sqlite的连接
-		$this->_sqliteConnector = new SQLite3($dbName);
+		$this->_sqliteConnector = new PDO('sqlite:E:\workspace\restiny\app\DataAccessor\phonebook.db');
 	}
 
 	public function getConnector() {

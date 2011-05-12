@@ -19,18 +19,40 @@ class RecordDataAccessor extends DataAccessor {
 	public function getRecord($recordId) {
 		$sql = 'SELECT * ';
 		$sql .= 'FROM '.self::DB_TABLE_NAME .' ';
-		$sql .= 'WHERE `record_id`=:id';
+		$sql .= 'WHERE `record_id`=?';
 
 		$statement = $this->getConnector()->prepare($sql);
-		$statement->bindValue(':id', $recordId);
-
-		$result = $statement->execute();
-
-		$r = $result->fetchArray();
-
-		d($r);
+		$statement->execute(array($recordId));
+		$result = $statement->fetchAll();
 	}
+	
+	public function addRecord(array $record) {
+		$sql = 'INSERT INTO ';	
+		$sql .= '`' . self::DB_TABLE_NAME . '`';
+		$sql .= 'VALUES (?, ?)';
+		
+		$statement = $this->getConnector()->prepare($sql);
+		return $statement->execute($record);
+	}
+	
+	public function editRecord($recordId, array $record) {
+		$sql = 'UPDATE ';	
+		$sql .= '`' . self::DB_NAME . '`';
+		$sql .= 'SET `name`=?, `cellphone`=?';
+		$sql .= 'WHERE `record_id`=?';
 
+		$statement = $this->getConnector()->prepare($sql);		
+		return $statement->execute(array($record['name'], $record['cellphone'], $recordId));
+	}
+	
+	public function deleteRecord($recordId) {
+		$sql = 'DELETE ';			
+		$sql .= '`' . self::DB_NAME . '`';
+		$sql .= 'WHERE `record_id`=?';
+		
+		$statement = $this->getConnector()->prepare($sql);
+		return $statement->execute(array($recordId));
+	}
 }
 
 ?>
