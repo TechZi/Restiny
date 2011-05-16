@@ -31,6 +31,8 @@ class Request {
 			$this->_requestParams = $_GET;
 		} elseif ($this->_requestMethod == 'POST') {
 			$this->_requestParams = $_POST;
+		} elseif ($this->_requestMethod == 'PUT') {
+			parse_str(file_get_contents('php://input'), $this->_requestMethod);
 		}
 
 		$this->_requestUri = $_SERVER['REQUEST_URI'];

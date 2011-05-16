@@ -33,7 +33,13 @@ class RecordResource extends Resource {
 	 * 创建记录
 	 */
 	public function post() {
+		$dataAccessor = new RecordDataAccessor();
 
+
+
+		$i = $dataAccessor->addRecord(array($this->getParam('name'), $this->getPatam('cellphone_number')));
+
+		var_dump($i);
 	}
 
 	/**

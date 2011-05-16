@@ -58,8 +58,9 @@ class ResourceRouterTest extends PHPUnit_Framework_TestCase {
 		$this->_mockResourceFile();
 
 		$requestUri = '/feed/100';
+		$requestParams = array();
 
-		$resource = ResourceRouter::loadResource($requestUri, $this->_getResourceConfig(), $this->_getMockedResourceFilePath());
+		$resource = ResourceRouter::loadResource($requestUri, $requestParams, $this->_getResourceConfig(), $this->_getMockedResourceFilePath());
 		$resource->get();
 		$outputData = $resource->getOutputData();
 
