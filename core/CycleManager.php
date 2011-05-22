@@ -14,6 +14,7 @@ class CycleManager {
 			}
 
 			$requestParams = $request->getRequestParams();
+			
 			$resource = ResourceRouter::loadResource($request->getRequestUri(), $requestParams);
 			$requestMethod = strtolower($request->getRequestMethod());
 			if (!method_exists($resource, $requestMethod)) {

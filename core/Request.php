@@ -35,9 +35,9 @@ class Request {
 			parse_str(file_get_contents('php://input'), $this->_requestMethod);
 		}
 
-		$this->_requestUri = $_SERVER['REQUEST_URI'];
+		$this->_requestUri = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '.'));
 
-		$this->_requestAccept = substr(strrchr($this->_requestUri, '.'), 1);
+		$this->_requestAccept = substr(strrchr($_SERVER['REQUEST_URI'], '.'), 1);
 	}
 
 	public function getRequesetAccept() {

@@ -13,10 +13,9 @@ class RecordResource extends Resource {
 	 *
 	 */
 	public function get() {
-		$recordId = $this->params['recordId'];
+		$recordId = $this->getParam('recordId');
 
 		$dataAccessor = new RecordDataAccessor();
-
 		$record = $dataAccessor->getRecord($recordId);
 
 		if (empty($record)) {
@@ -34,12 +33,16 @@ class RecordResource extends Resource {
 	 */
 	public function post() {
 		$dataAccessor = new RecordDataAccessor();
+		$result = $dataAccessor->addRecord(array($this->getParam('name'), $this->getParam('cellphone_number')));
+		
+		$outputData = array(
+			'data' => array(),
+			'message' => 'Added successfullys'
+		);
 
-
-
-		$i = $dataAccessor->addRecord(array($this->getParam('name'), $this->getPatam('cellphone_number')));
-
-		var_dump($i);
+		if ($result) {
+			$this->setOutputData($outputData);
+		}
 	}
 
 	/**

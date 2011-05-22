@@ -23,13 +23,15 @@ class RecordDataAccessor extends DataAccessor {
 
 		$statement = $this->getConnector()->prepare($sql);
 		$statement->execute(array($recordId));
-		$result = $statement->fetchAll();
+		$result = $statement->fetch(PDO::FETCH_ASSOC);
+
+		return $result;
 	}
 	
 	public function addRecord(array $record) {
 		$sql = 'INSERT INTO ';	
-		$sql .= '`' . self::DB_TABLE_NAME . '`';
-		$sql .= 'VALUES (?, ?)';
+		$sql .= '`' . self::DB_TABLE_NAME . '` ';
+		$sql .= 'VALUES (null, ?, ?)';
 		
 		$statement = $this->getConnector()->prepare($sql);
 		return $statement->execute($record);
