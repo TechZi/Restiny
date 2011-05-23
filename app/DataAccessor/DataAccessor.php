@@ -15,7 +15,11 @@ class DataAccessor {
 		
 		$this->_sqliteConnector = new PDO('sqlite:D:\php\workspace\restiny\trunk\app\DataAccessor\phonebook.db');
 	}
-
+	
+	/**
+	 *
+	 * @return PDO
+	 */
 	public function getConnector() {
 		return $this->_sqliteConnector;
 	}

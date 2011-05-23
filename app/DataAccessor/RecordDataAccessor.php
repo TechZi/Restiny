@@ -39,7 +39,7 @@ class RecordDataAccessor extends DataAccessor {
 	
 	public function editRecord($recordId, array $record) {
 		$sql = 'UPDATE ';	
-		$sql .= '`' . self::DB_NAME . '`';
+		$sql .= '`' . self::DB_TABLE_NAME . '` ';
 		$sql .= 'SET `name`=?, `cellphone`=?';
 		$sql .= 'WHERE `record_id`=?';
 
@@ -48,10 +48,10 @@ class RecordDataAccessor extends DataAccessor {
 	}
 	
 	public function deleteRecord($recordId) {
-		$sql = 'DELETE ';			
-		$sql .= '`' . self::DB_NAME . '`';
+		$sql = 'DELETE FROM ';			
+		$sql .= '`' . self::DB_TABLE_NAME . '` ';
 		$sql .= 'WHERE `record_id`=?';
-		
+	
 		$statement = $this->getConnector()->prepare($sql);
 		return $statement->execute(array($recordId));
 	}

@@ -19,7 +19,6 @@ class RecordResource extends Resource {
 		$record = $dataAccessor->getRecord($recordId);
 
 		if (empty($record)) {
-			//TODO code=200 但是内容为空
 			throw new RestinyResourceException("No.{$recordId} not found", '404');
 
 			return ;
@@ -56,7 +55,18 @@ class RecordResource extends Resource {
 	 * 删除记录
 	 */
 	public function delete() {
+		$dataAccessor = new RecordDataAccessor();
 
+		$result = $dataAccessor->deleteRecord($this->getParam('recordId'));
+
+		$outputData = array(
+			'data' => array(),
+			'message' => 'Deleted successfullys'
+		);
+
+		if ($result) {
+			$this->setOutputData($outputData);
+		}
 	}
 }
 
